@@ -20,3 +20,9 @@ def obj_rule(model):
 model.z = Objective(rule = obj_rule, sense=maximize)
 
 model.budgetconstr = Constraint(expr = sum(c[i]*model.x[i] for i in A) <= b)
+
+opt = SolverFactory("glpk")
+instance = model.create_instance("test.dat")
+
+results = opt.solve(instance)
+instance.display()
